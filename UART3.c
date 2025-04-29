@@ -1,7 +1,21 @@
-#include "UART3.h"
-#include "TM4C123.h"
+/**
+* @file UART3.c
+*
+* @bried Header file for UART3 driver 
+*
+* @note Enabling UART3 for the Arduino MKR Zero soundboard
+*
+* @author Evelyn Dominguez
+*/
 
-//Enable UART for the soundboard 
+#include "UART3.h"
+#include "TM4C123GH6PM.h"
+
+//Constant definitions for the user song commands
+const uint8_t PAUSE 		= 0x01;
+const uint8_t PLAY 		= 0x02;
+const uint8_t VOLUME_UP		= 0x03;
+const uint8_t VOLUME_DOWN		= 0x04;
 
 void UART3_Init(void)
 {
@@ -55,6 +69,11 @@ void UART3_Init(void)
 	
 	// Enable the digital functionality for the PC7 and PC6 pins
 	GPIOC->DEN |= 0xC0;
+}
+
+void UART3_Output(uint8_t song_command)
+{
+	GPIOC -> DATA = (GPIOC-> DATA & 0xFF) | song_command;
 }
 
 char UART3_Input_Character(void)

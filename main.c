@@ -1,11 +1,11 @@
 
 #include "TM4C123GH6PM.h"
-
 #include "stdlib.h"
+#include "SysTick_Delay.h"
+
 #include "UART3.h"
 #include "UART_BLE.h"
 
-#include "SysTick_Delay.h"
 #include "stdio.h"
 #include "Stepper_Motor.h"
 
@@ -87,20 +87,24 @@ int main(void)
 
 void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 {
-	
 	if (Check_UART_BLE_Data(UART_BLE_Buffer, "PAUSE"))
 	{
-		UART3_Output_String("PAUSE");
+		UART3_Output_String("PAUSE\n");
+	}
+	
+	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "PLAY"))
+	{
+		UART3_Output_String("PLAY\n");
 	}
 	
 	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "VOLUME UP"))
 	{
-		UART3_Output_String("VOLUME UP");
+		UART3_Output_String("VOLUME UP\n");
 	}
 	
 	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "VOLUME DOWN"))
 	{
-		UART3_Output_String("VOLUME DOWN");
+		UART3_Output_String("VOLUME DOWN\n");
 	}
 		
 	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "ATZ"))
