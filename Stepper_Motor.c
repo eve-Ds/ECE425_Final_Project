@@ -11,7 +11,7 @@
  *  - ULN2003 Stepper Motor Driver
  *  - 3.3V / 5V Breadboard Power Supply Module (External Power Source)
  *
- * @author Aaron Nanas
+ * @author Aaron Nanas and Evelyn Dominguez
  */
 
 #include "Stepper_Motor.h"
