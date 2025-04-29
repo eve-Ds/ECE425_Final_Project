@@ -13,12 +13,6 @@
 #define UART3_RECEIVE_FIFO_EMPTY_BIT_MASK 0x10
 #define UART3_TRANSMIT_FIFO_FULL_BIT_MASK 0x20
 
-//Constant definitions for the user song commands
-extern const uint8_t PAUSE;
-extern const uint8_t PLAY;
-extern const uint8_t VOLUME_UP;
-extern const uint8_t VOLUME_DOWN;
-
 /**
  * @brief Carriage return character
  */
@@ -44,7 +38,6 @@ extern const uint8_t VOLUME_DOWN;
  */
 #define UART3_DEL  0x7F
 
-void UART3_Output(uint8_t song_command);
 
 /**
  * @brief The UART0_Init function initializes the UART0 module.
