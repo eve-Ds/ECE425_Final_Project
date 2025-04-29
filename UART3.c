@@ -67,7 +67,6 @@ void UART3_Init(void)
 }
 
 
-
 char UART3_Input_Character(void)
 {
 	while((UART3->FR & UART3_RECEIVE_FIFO_EMPTY_BIT_MASK) != 0);

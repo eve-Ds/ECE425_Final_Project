@@ -5,7 +5,7 @@
 
 #include "UART3.h"
 #include "UART_BLE.h"
-
+#include "UART0.h"
 #include "stdio.h"
 #include "Stepper_Motor.h"
 
@@ -21,8 +21,8 @@ int main(void)
 	// Initialize an array to store the characters received from the Adafruit BLE UART module
 	char UART_BLE_Buffer[BUFFER_SIZE];
 
-	// Initialize the UART3 module which will be used to print characters on the serial terminal
-	UART3_Init();
+	// Initialize the UART0 module which will be used to print characters on the serial terminal
+	UART0_Init();
 	
 	// Initialize the UART1 module which will be used to communicate with the Adafruit BLE UART module
 	UART_BLE_Init();
@@ -39,13 +39,13 @@ int main(void)
 	SysTick_Delay1ms(1000);
 	
   //Stepper Motor:
-	int step_index = 0;
-	const uint8_t half_step[] = {0x01, 0x03, 0x02, 0x06, 0x04, 0x0C, 0x08, 0x09};
+	//int step_index = 0;
+	//const uint8_t half_step[] = {0x01, 0x03, 0x02, 0x06, 0x04, 0x0C, 0x08, 0x09};
 	
 	//Stepper Motor:
 	while(1)
 	{
-		if (step_index >= 8)
+		/*if (step_index >= 8)
 		{
 			step_index = 0;
 		}
@@ -54,36 +54,36 @@ int main(void)
 		SysTick_Delay1us(1200);
 	
 	if(UART_BLE_Available())
-	{
+	{*/
 		int string_size = UART_BLE_Input_String(UART_BLE_Buffer, BUFFER_SIZE);
 		
-		UART3_Output_String("String Size: ");
-		UART3_Output_Unsigned_Decimal(string_size);
-		UART3_Output_Newline();
+		UART0_Output_String("String Size: ");
+		UART0_Output_Unsigned_Decimal(string_size);
+		UART0_Output_Newline();
 		
-		UART3_Output_String("UART BLE Data: ");
+		UART0_Output_String("UART BLE Data: ");
 		
 		for (int i = 0; i < string_size; i++)
 		{
 			if (UART_BLE_Buffer[i] == 0)
 			{
-				UART3_Output_Character('A');
+				UART0_Output_Character('A');
 			}
 			else
 			{
-				UART3_Output_Character(UART_BLE_Buffer[i]);
+				UART0_Output_Character(UART_BLE_Buffer[i]);
 			}
 		}
 		
-		UART3_Output_Newline();
+		UART0_Output_Newline();
 		
 		Process_UART_BLE_Data(UART_BLE_Buffer);
 		
-		UART3_Output_Newline();
+		UART0_Output_Newline();
 	}
 }
 	
-}
+//}
 
 void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 {
@@ -109,8 +109,8 @@ void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 		
 	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "ATZ"))
 	{
-		UART3_Output_String("UART BLE Reset Command Issued");
-		UART3_Output_Newline();
+		UART0_Output_String("UART BLE Reset Command Issued\n");
+		UART0_Output_Newline();
 	}
 	
 	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "OK"))
@@ -122,13 +122,14 @@ void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 		// from being added to the buffer when the user sends a command string for the first time
 		char character = UART_BLE_Input_Character();
 		
-		UART3_Output_String("UART BLE Response Received");
-		UART3_Output_Newline();
+		UART0_Output_String("UART BLE Response Received\n");
+		UART0_Output_Newline();
 	}
 	
 	else
 	{
-		UART3_Output_String("UART BLE Command Not Found");
-		UART3_Output_Newline();
+		UART0_Output_String("UART BLE Command Not Found");
+		UART3_Output_String(UART_BLE_Buffer);
+		
 	}
 }
