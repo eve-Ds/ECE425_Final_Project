@@ -1,9 +1,22 @@
+/**
+* @file sketch_apr26a.ino
+*
+* @brief Sending commands to the soundboard, to play/pause 
+* and adjust volume
+*
+* @note This project was created with assistance from ChatGPT and the following reference:
+* -Link:https://docs.arduino.cc/tutorials/generic/wave-playback/#troubleshoot
+*
+* @author Evelyn Dominguez & Chat GPT
+*/
+
 #include <SD.h>
 #include <ArduinoSound.h>
 
 SDWaveFile waveFile;
 String currentSong = "";
 bool isPaused = false;
+int currentVol = 5; 
 
 void setup() {
   Serial.begin(115200);
@@ -16,15 +29,18 @@ void setup() {
   Serial.print("Initializing SD card...");
   if (!SD.begin()) {
     Serial.println("SD initialization failed!");
+
     while (1);
   }
   Serial.println("SD card initialized.");
-
-  AudioOutI2S.volume(5); // default volume
+  AudioOutI2S.volume(currentVol); // default volume
 }
 
+//equalIgnorecase: ignores differences in uppercase and lowercase letters
 void loop() {
-  if (Serial1.available()) {
+
+  
+if (Serial1.available()) {
     String incomingCommand = Serial1.readStringUntil('\n');
     incomingCommand.trim(); // Remove \r, \n, spaces at start and end
 
@@ -38,17 +54,34 @@ void loop() {
         Serial.println("Playback paused.");
       }
     }
-    else if (incomingCommand.startsWith("VOLUME UP")) {
-      String volumeStr = incomingCommand.substring(7);
-      int volumeLevel = volumeStr.toInt();
-      if (volumeLevel >= 0 && volumeLevel <= 20) {
-        AudioOutI2S.volume(volumeLevel);
-        Serial.print("Volume set to: ");
-        Serial.println(volumeLevel);
-      } else {
-        Serial.println("Invalid volume level!");
+    else if (incomingCommand.equalsIgnoreCase("PLAY")) {
+      //if no audio and a song is loaded resume playback
+      if(!AudioOutI2S.isPlaying() && !currentSong.isEmpty()) {
+        AudioOutI2S.play(waveFile);
+        isPaused = false;
+        Serial.println("Playback resumed.");
       }
     }
+    //control volume: AudioOutI2S.volume(level) 
+    //level is between 0 and 20
+    else if (incomingCommand.equalsIgnoreCase("VOLUME UP")) {
+      if (currentVol < 20){
+      currentVol ++;
+      AudioOutI2S.volume(currentVol);
+      Serial.print("Volume increase to: ");
+      Serial.println(currentVol);
+      }
+    }
+   else if (incomingCommand.equalsIgnoreCase("VOLUME DOWN")) {
+      //lowers volume
+      if (currentVol >= 0) {
+        currentVol --;
+        AudioOutI2S.volume(currentVol);
+        Serial.print("Volume decrease to: ");
+        Serial.println(currentVol);
+      }
+    }
+
     else {
       // Assume new song name
       String filename = incomingCommand + ".wav";
@@ -62,13 +95,19 @@ void loop() {
 
         if (waveFile && AudioOutI2S.canPlay(waveFile)) {
           AudioOutI2S.play(waveFile);
+          delay(100);
+          while (!AudioOutI2S.isPlaying()){
+            delay(10);
+          }
           currentSong = filename;
           isPaused = false;
           Serial.println("Playing: " + filename);
-        } else {
+        } 
+        else {
           Serial.println("Cannot play the wave file!");
         }
-      } else {
+      } 
+      else {
         Serial.println("File not found on SD: " + filename);
       }
     }
@@ -78,7 +117,7 @@ void loop() {
   if (!AudioOutI2S.isPlaying() && !isPaused && currentSong != "") {
     Serial.println("Finished playing: " + currentSong);
     currentSong = "";
-    waveFile = SDWaveFile(); // Clear waveFile
+    //waveFile = SDWaveFile(); // Clear waveFile
   }
 }
 
