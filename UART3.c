@@ -31,8 +31,8 @@ void UART3_Init(void)
 	// N = (System Clock Frequency) / (16 * Baud Rate)
 	// N = (50,000,000) / (16 * 115200) = 27.12673611 (N = 27)
 	// F = ((0.12673611 * 64) + 0.5) = 8.611 (F = 8)
-	UART3->IBRD = 27;
-	UART3->FBRD = 8;
+	UART3->IBRD = 325; //27
+	UART3->FBRD = 33; //8
 	
 	// Configure the data word length of the UART packet to be 8 bits by 
 	UART3->LCRH |= 0x60;
@@ -96,6 +96,7 @@ void UART3_Input_String(char *buffer_pointer, uint16_t buffer_size)
 				UART3_Output_Character(UART3_BS);
 			}
 		}
+		
 		else if(length < buffer_size)
 		{
 			*buffer_pointer = character;
