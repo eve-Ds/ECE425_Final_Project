@@ -14,13 +14,15 @@
 #include <ArduinoSound.h>
 
 SDWaveFile waveFile;
+
 String currentSong = "";
 bool isPaused = false;
+bool songDone = false;
 int currentVol = 5; 
 
 void setup() {
-  Serial.begin(115200);
-  Serial1.begin(115200);
+  Serial.begin(9600);//115200
+  Serial1.begin(9600);
 
   while (!Serial) {
     ; // Wait for Serial Monitor
@@ -38,9 +40,7 @@ void setup() {
 
 //equalIgnorecase: ignores differences in uppercase and lowercase letters
 void loop() {
-
-  
-if (Serial1.available()) {
+  if (Serial1.available()) {
     String incomingCommand = Serial1.readStringUntil('\n');
     incomingCommand.trim(); // Remove \r, \n, spaces at start and end
 
@@ -53,22 +53,24 @@ if (Serial1.available()) {
         isPaused = true;
         Serial.println("Playback paused.");
       }
-    }
-    else if (incomingCommand.equalsIgnoreCase("PLAY")) {
-      //if no audio and a song is loaded resume playback
-      if(!AudioOutI2S.isPlaying() && !currentSong.isEmpty()) {
-        AudioOutI2S.play(waveFile);
-        isPaused = false;
-        Serial.println("Playback resumed.");
+    } 
+    else if (incomingCommand.equalsIgnoreCase("RESUME")) {
+      if (isPaused && !currentSong.isEmpty()) {
+        Serial.println("Resuming song...");
+        if (AudioOutI2S.resume()) {
+          isPaused = false;
+          Serial.println("Playback resumed.");
+        }
+        }
       }
-    }
+    
     //control volume: AudioOutI2S.volume(level) 
     //level is between 0 and 20
     else if (incomingCommand.equalsIgnoreCase("VOLUME UP")) {
       if (currentVol < 20){
       currentVol ++;
       AudioOutI2S.volume(currentVol);
-      Serial.print("Volume increase to: ");
+      Serial.print("Volume increase to: \n");
       Serial.println(currentVol);
       }
     }
@@ -86,16 +88,18 @@ if (Serial1.available()) {
       // Assume new song name
       String filename = incomingCommand + ".wav";
       if (SD.exists(filename.c_str())) {
-        if (AudioOutI2S.isPlaying()) {
+        if (AudioOutI2S.isPlaying() || isPaused) {
           AudioOutI2S.stop();
           delay(100); // Allow I2S hardware to reset
+          isPaused = false;
         }
-
+        Serial.println("Loading new song: " + filename);
         waveFile = SDWaveFile(filename.c_str());
 
         if (waveFile && AudioOutI2S.canPlay(waveFile)) {
           AudioOutI2S.play(waveFile);
-          delay(100);
+          songDone = false;
+          delay(200);
           while (!AudioOutI2S.isPlaying()){
             delay(10);
           }
@@ -114,10 +118,12 @@ if (Serial1.available()) {
   }
 
   // Check if song ended naturally
-  if (!AudioOutI2S.isPlaying() && !isPaused && currentSong != "") {
+  if (!AudioOutI2S.isPlaying() && !isPaused && !currentSong.isEmpty() && !songDone) {
     Serial.println("Finished playing: " + currentSong);
     currentSong = "";
-    //waveFile = SDWaveFile(); // Clear waveFile
+    waveFile = SDWaveFile(); 
+    songDone = true;
   }
 }
+
 
