@@ -15,6 +15,7 @@
  */
 
 #include "Stepper_Motor.h"
+#include "SysTick_Delay.h"
  
 void Stepper_Motor_Init()
 {
@@ -34,4 +35,14 @@ void Stepper_Motor_Init()
 	GPIOF -> AFSEL &= ~0x0C;
 	GPIOF->DEN |= 0x0C;
 	GPIOF->DATA |= 0x0C;
+}
+//default: motor off
+int motorActive = 0;
+
+void Stop_Stepper_Motor(void) {
+	GPIOA->DATA &= ~0x3C;
+	motorActive = 0;
+}
+void Start_Stepper_Motor(void) {
+	motorActive = 1;
 }

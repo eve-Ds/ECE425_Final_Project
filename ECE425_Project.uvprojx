@@ -424,6 +424,11 @@
               <FileType>1</FileType>
               <FilePath>.\UART0.c</FilePath>
             </File>
+            <File>
+              <FileName>Timer_0A_Interrupt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Timer_0A_Interrupt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -458,6 +463,11 @@
               <FileName>UART0.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\UART0.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer_0A_Interrupt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Timer_0A_Interrupt.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -16,6 +16,7 @@
 
 #include "TM4C123GH6PM.h"
 
+
 /**
  * @brief
  *
@@ -24,3 +25,5 @@
  * @return None
  */
 void Stepper_Motor_Init();
+void Stop_Stepper_Motor(void);
+void Start_Stepper_Motor(void);

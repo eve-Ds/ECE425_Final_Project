@@ -10,10 +10,13 @@
 #include "Stepper_Motor.h"
 
 #include "string.h"
+#include "Timer_0A_Interrupt.h"
 
 #define BUFFER_SIZE   128
 
 void Process_UART_BLE_Data(char UART_BLE_Buffer[]);
+void Timer_0A_Stepper_Motor(void);
+extern int motorActive;
 
 int main(void)
 {		
@@ -34,6 +37,7 @@ int main(void)
 	
 	//Initialize the pins used by the 28BYJ-48 Stepper Motor and the ULN2003 Stepper Motor Driver
 	Stepper_Motor_Init();
+	Timer_0A_Interrupt_Init(Timer_0A_Stepper_Motor);
 	
 	// Provide a short delay after initialization and reset the Adafruit BLE UART module
 	SysTick_Delay1ms(1000);
@@ -44,26 +48,11 @@ int main(void)
 	UART_BLE_Output_String(" ");
 	SysTick_Delay1ms(1000);
 	
-	//Stepper Motor:
-	int step_index = 0;
-	const uint8_t half_step[] = {0x01, 0x03, 0x02, 0x06, 0x04, 0x0C, 0x08, 0x09};
-	
-	
-	while(1)
-	{
-		if (step_index >= 8)
-		{
-			step_index = 0;
-		}
-		GPIOA->DATA = (GPIOA->DATA & ~0x3C) | half_step[step_index];
-		step_index = step_index + 1;
-		SysTick_Delay1us(1200);
-	
+	while(1) {
 		
 	if(UART_BLE_Available())
 	{
 		SysTick_Delay1ms(1000);
-
 		int string_size = UART_BLE_Input_String(UART_BLE_Buffer, BUFFER_SIZE);
 		
 		UART0_Output_String("String Size: ");
@@ -85,9 +74,7 @@ int main(void)
 		}
 		
 		UART0_Output_Newline();
-		
 		Process_UART_BLE_Data(UART_BLE_Buffer);
-		
 		UART0_Output_Newline();
 	}
 }
@@ -99,12 +86,16 @@ void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 	if (Check_UART_BLE_Data(UART_BLE_Buffer, "PAUSE"))
 	{
 		UART3_Output_String("PAUSE");
+		SysTick_Delay1ms(1300);
+		Stop_Stepper_Motor();
 	}
 	
 	
-	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "PLAY"))
+	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "RESUME"))
 	{
-		UART3_Output_String("PLAY");
+		UART3_Output_String("RESUME");
+		SysTick_Delay1ms(1300); 
+		Start_Stepper_Motor();
 	}
 	
 	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "VOLUME UP"))
@@ -135,12 +126,31 @@ void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 		UART0_Output_String("UART BLE Response Received");
 		UART3_Output_Newline();
 	}
-	
-	else
+
+	else {
+		UART3_Output_String(UART_BLE_Buffer);
+		SysTick_Delay1ms(1300);
+		Start_Stepper_Motor();
+	} 
+	/*
+	else 
 	{
 		UART0_Output_String("UART BLE Command Not Found");
 		UART3_Output_String(UART_BLE_Buffer);
 		UART3_Output_Newline();
-		
+	} */
+	
+}
+int step_index = 0;
+const uint8_t half_step[] = {0x04, 0x0C, 0x08, 0x18, 0x10, 0x30, 0x20, 0x24};
+
+	void Timer_0A_Stepper_Motor(void) {
+		if (motorActive) {
+			if (step_index >= 8)
+				{
+			step_index = 0;
+		}
+		GPIOA->DATA = (GPIOA->DATA & ~0x3C) | half_step[step_index];
+		step_index = step_index + 1;
 	}
 }
