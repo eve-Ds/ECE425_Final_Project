@@ -43,6 +43,7 @@ void Stop_Stepper_Motor(void) {
 	GPIOA->DATA &= ~0x3C;
 	motorActive = 0;
 }
+
 void Start_Stepper_Motor(void) {
 	motorActive = 1;
 }

@@ -47,6 +47,8 @@ int main(void)
 	UART_BLE_Output_String("UART BLE Active");
 	UART_BLE_Output_String(" ");
 	SysTick_Delay1ms(1000);
+	//testing:
+	Stop_Stepper_Motor();
 	
 	while(1) {
 		
@@ -89,8 +91,7 @@ void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 		SysTick_Delay1ms(1300);
 		Stop_Stepper_Motor();
 	}
-	
-	
+
 	else if (Check_UART_BLE_Data(UART_BLE_Buffer, "RESUME"))
 	{
 		UART3_Output_String("RESUME");
@@ -130,7 +131,6 @@ void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 	else {
 		UART3_Output_String(UART_BLE_Buffer);
 		SysTick_Delay1ms(1300);
-		Start_Stepper_Motor();
 	} 
 	/*
 	else 

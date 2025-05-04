@@ -24,7 +24,7 @@ int currentVol = 5;
 void setup() {
   Serial.begin(9600);//115200
   Serial1.begin(9600);
-  Serial1.println("PAUSE");
+  //Serial1.println("PAUSE");
 
   while (!Serial) {
     ; // Wait for Serial Monitor
@@ -133,6 +133,9 @@ void loop() {
     songDone = true;
   }
 }
+
+
+
 
 
 

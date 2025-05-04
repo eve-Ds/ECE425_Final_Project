@@ -10,6 +10,7 @@
 
 #include "UART3.h"
 #include "TM4C123GH6PM.h"
+#include "Stepper_Motor.h"
 
 
 void UART3_Init(void)
@@ -66,7 +67,6 @@ void UART3_Init(void)
 	GPIOC->DEN |= 0xC0;
 }
 
-
 char UART3_Input_Character(void)
 {
 	while((UART3->FR & UART3_RECEIVE_FIFO_EMPTY_BIT_MASK) != 0);
@@ -113,6 +113,7 @@ void UART3_Output_String(char *pt)
 {
 	while(*pt)
 	{
+		Start_Stepper_Motor();
 		UART3_Output_Character(*pt);
 		pt++;
 	}
