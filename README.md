@@ -27,10 +27,10 @@ Hardware and software integration will be needed for this project. The embedded 
 
 # Pinout Plan
 
-| Tiva TM4C123G Launch Pad |      BLE         | 
-|:-------------------------|:----------------:| 
-|           PB7            | UART MOD (Pin 1) |
-|           GND            | UART CTS (Pin 2) |
+| Tiva TM4C123G Launch Pad |      BLE         |  
+|:-------------------------|:----------------:|      
+|           PB7            | UART MOD (Pin 1) |  
+|           GND            | UART CTS (Pin 2) |   
 |         PB0 (U1RX)       | UART TXO (Pin 3) |
 |         PB1 (U1TX)       | UART RXI (Pin 4) |
 |         VCC (3.3V)       | UART Vin (Pin 5) |
@@ -58,6 +58,12 @@ Hardware and software integration will be needed for this project. The embedded 
 
 # Analysis and Results
 [Music Box Results](https://www.canva.com/design/DAGm7YwPNNw/MNcKtzlYKJV5YfbCSA-QCQ/watch?utm_content=DAGm7YwPNNw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0fc30edceb)
+
+<img src = "https://github.com/user-attachments/assets/281a8b80-f496-4449-b6a1-682572280bcb" width = "300"> <img src = "https://github.com/user-attachments/assets/d72f9a73-b11b-4b2c-b418-24d5b7dfa0b5" width = "200" >
+
+
+
+
 
 
 # Conclusion
