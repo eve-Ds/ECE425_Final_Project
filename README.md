@@ -58,6 +58,7 @@ Hardware and software integration will be needed for this project. The embedded 
 
 # Analysis and Results
 The music box can connect to the BLE through the Bluefruit Connect app when the Arduino MKR Zero board is powered on. Users can enter a song name, which will then be checked to determine if it is a valid WAV file on the SD card. Once a valid WAV file is found, the music begins to play and the motor starts to spin. Users can also adjust the volume and pause or resume the song. If the user enters "PAUSE," the music will stop and the motor will come to a halt. When the user enters "RESUME," the music and motor will continue from where they left off. Video Demonstration is shown below: 
+
 [Music Box Results](https://www.canva.com/design/DAGm7YwPNNw/MNcKtzlYKJV5YfbCSA-QCQ/watch?utm_content=DAGm7YwPNNw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0fc30edceb)
 
 Inside the music box:
