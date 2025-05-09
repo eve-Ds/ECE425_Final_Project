@@ -57,9 +57,10 @@ Hardware and software integration will be needed for this project. The embedded 
 |            PA5           |             IN4             |
 
 # Analysis and Results
-The music box can connect to the BLE through the Bluefruit Connect app when the Arduino MKR Zero board is powered on. Users can enter a song name, which will then be checked to determine if it is a valid WAV file on the SD card. Once a valid WAV file is found, the music begins to play and the motor starts to spin. Users can also adjust the volume and pause or resume the song. If the user enters "PAUSE," the music will stop and the motor will come to a halt. When the user enters "RESUME," the music and motor will continue from where they left off. Video Demonstration is shown below:
+The music box can connect to the BLE through the Bluefruit Connect app when the Arduino MKR Zero board is powered on. Users can enter a song name, which will then be checked to determine if it is a valid WAV file on the SD card. Once a valid WAV file is found, the music begins to play and the motor starts to spin. Users can also adjust the volume and pause or resume the song. If the user enters "PAUSE," the music will stop and the motor will come to a halt. When the user enters "RESUME," the music and motor will continue from where they left off. Video Demonstration is shown below: 
 [Music Box Results](https://www.canva.com/design/DAGm7YwPNNw/MNcKtzlYKJV5YfbCSA-QCQ/watch?utm_content=DAGm7YwPNNw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0fc30edceb)
 
+Inside the music box:
 <img src = "https://github.com/user-attachments/assets/281a8b80-f496-4449-b6a1-682572280bcb" width = "300"> <img src = "https://github.com/user-attachments/assets/d72f9a73-b11b-4b2c-b418-24d5b7dfa0b5" width = "200" >
 
 Some challenges I encountered included synchronizing the start of the motor and the song. I had to experiment with the delays to ensure that the motor starts as soon as the song begins to play. While I was able to synchronize the pause function for both the motor and the song, there is still a slight delay between their start times. I also faced issues with the Arduino IDE. When I connected the MKR Zero board to my laptop, there were times where the IDE did not recognize the port, even though the board was connected and powered on. 
