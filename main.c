@@ -1,3 +1,18 @@
+/**
+* @file main.c
+*
+* @brief Main source code for the music box  
+* 
+* @param none
+*
+* @notes This code interfaces with the  following:
+*        - UART3 (Arduino MKR Zero)
+*        - UART BLE
+*        - Stepper motor
+*        - SysTick Delay
+*
+* @author Evelyn Dominguez
+*/
 
 #include "TM4C123GH6PM.h"
 #include "stdlib.h"
@@ -47,7 +62,7 @@ int main(void)
 	UART_BLE_Output_String("UART BLE Active");
 	UART_BLE_Output_String(" ");
 	SysTick_Delay1ms(1000);
-	//testing:
+	
 	Stop_Stepper_Motor();
 	
 	while(1) {
@@ -74,7 +89,6 @@ int main(void)
 				UART0_Output_Character(UART_BLE_Buffer[i]);
 			}
 		}
-		
 		UART0_Output_Newline();
 		Process_UART_BLE_Data(UART_BLE_Buffer);
 		UART0_Output_Newline();
@@ -132,13 +146,6 @@ void Process_UART_BLE_Data(char UART_BLE_Buffer[])
 		UART3_Output_String(UART_BLE_Buffer);
 		SysTick_Delay1ms(1300);
 	} 
-	/*
-	else 
-	{
-		UART0_Output_String("UART BLE Command Not Found");
-		UART3_Output_String(UART_BLE_Buffer);
-		UART3_Output_Newline();
-	} */
 	
 }
 int step_index = 0;

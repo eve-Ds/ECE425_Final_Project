@@ -36,14 +36,16 @@ void Stepper_Motor_Init()
 	GPIOF->DEN |= 0x0C;
 	GPIOF->DATA |= 0x0C;
 }
+
 //default: motor off
 int motorActive = 0;
 
+//controls the stop of the motor
 void Stop_Stepper_Motor(void) {
 	GPIOA->DATA &= ~0x3C;
 	motorActive = 0;
 }
-
+//controls the start of the motor
 void Start_Stepper_Motor(void) {
 	motorActive = 1;
 }

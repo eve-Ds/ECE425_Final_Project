@@ -18,12 +18,27 @@
 
 
 /**
- * @brief
+ * @brief Initializes stepper motor
  *
- * @param None
+ * @param none
  *
  * @return None
  */
 void Stepper_Motor_Init();
+
+/**
+ * @brief Controls the stop of the motor
+ *
+ * @param void
+ *
+ * @return None
+ */
 void Stop_Stepper_Motor(void);
+/**
+ * @brief Controls the start of the motor
+ *
+ * @param void
+ *
+ * @return None
+ */
 void Start_Stepper_Motor(void);

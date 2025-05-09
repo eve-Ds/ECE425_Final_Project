@@ -1,9 +1,13 @@
 /**
 * @file UART3.c
 *
-* @bried Header file for UART3 driver 
+* @brief Header file for UART3 driver 
 *
 * @note Enabling UART3 for the Arduino MKR Zero soundboard
+*
+* The Ardino MKR Zero uses the following pinout:
+*   - MKR Zero RX  <-->  Tiva LaunchPad Pin PC6
+*   - MKR Zero TX  <-->  Tiva LaunchPad Pin PC7
 *
 * @author Evelyn Dominguez
 */
@@ -113,6 +117,7 @@ void UART3_Output_String(char *pt)
 {
 	while(*pt)
 	{
+		//starts motor
 		Start_Stepper_Motor();
 		UART3_Output_Character(*pt);
 		pt++;

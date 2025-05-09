@@ -415,11 +415,6 @@
               <FilePath>.\Stepper_Motor.c</FilePath>
             </File>
             <File>
-              <FileName>Play_Song.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Play_Song.c</FilePath>
-            </File>
-            <File>
               <FileName>UART0.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\UART0.c</FilePath>
@@ -453,11 +448,6 @@
               <FileName>Stepper_Motor.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Stepper_Motor.h</FilePath>
-            </File>
-            <File>
-              <FileName>Play_Song.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Play_Song.h</FilePath>
             </File>
             <File>
               <FileName>UART0.h</FileName>
