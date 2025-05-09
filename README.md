@@ -57,7 +57,7 @@ Hardware and software integration will be needed for this project. The embedded 
 |            PA5           |             IN4             |
 
 # Analysis and Results
-
+[<img src = "https://www.canva.com/design/DAGm7YwPNNw/MNcKtzlYKJV5YfbCSA-QCQ/watch?utm_content=DAGm7YwPNNw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0fc30edceb" width = "500" height = "200" />]
 
 
 # Conclusion
