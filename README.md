@@ -14,6 +14,17 @@ microcontroller to communicate with a BLE module, an Arduino MKR Zero board, and
 
 # Components Used
 
+|                        Description                     | Quantity |   Manufacturer   |
+|:------------------------------------------------------:|:--------:|:----------------:|
+|               Tiva C Series TM4C123G LaunchPad         |     1    | Texa Instruments |
+|                  USB-A to Micro-USB Cable              |     1    |        N/A       |
+|                28BYJ-48 Stepper Motor (5V)             |     1    |        N/A       |
+|               ULN2003 Stepper Motor Driver             |     1    |        N/A       |
+|           3.3V/5V Breadboard Power Supply Module       |     1    |        N/A       |
+|                 Arduino MKR Zero Board                 |     1    |      Arduino     |
+|                           SD card                      |     1    |        N/A       |
+| Adafruit Bluefruit LE UART Friend Bluetooth Low Energy |     1    |     Adafruit     |
+| Adafruit I2S 3W Class D Amplifier Breakout - MAX98357A |     1    |     Adafruit     |
 
 # Pinout Plan
 
@@ -25,6 +36,28 @@ microcontroller to communicate with a BLE module, an Arduino MKR Zero board, and
 |         PB1 (U1TX)       | UART RXI (Pin 4) |
 |         VCC (3.3V)       | UART Vin (Pin 5) |
 |           GND            | UART GND (Pin 7) |
+
+| Tiva TM4C123G Launch Pad | Arduino MKR Zero | 
+|:-------------------------|:----------------:|
+|       PC6 (U3TX)         |        RX        |
+|       PC7 (U3RX)         |        TX        |
+
+|     Arduino MKR Zero     |     Amplifier    | 
+|:-------------------------|:----------------:|
+|           GND            |        GND       |
+|           5V             |        Vin       |
+|         Pin 3            |        LRC       |
+|         Pin 2            |        BCLK      |
+|         Pin A6           |        DIN       |
+
+| Tiva TM4C123G Launch Pad | ULN2003 Stepper Motor Drive | 
+|:-------------------------|:---------------------------:|
+|            PA2           |             IN1             |
+|            PA3           |             IN2             |
+|            PA4           |             IN3             |
+|            PA5           |             IN4             |
+
+
 
 
 
