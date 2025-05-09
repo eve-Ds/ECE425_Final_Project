@@ -56,6 +56,11 @@ Hardware and software integration will be needed for this project. The embedded 
 |            PA4           |             IN3             |
 |            PA5           |             IN4             |
 
+# Analysis and Results
+
+
+
+# Conclusion
 
 
 
