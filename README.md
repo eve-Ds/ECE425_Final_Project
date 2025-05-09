@@ -66,11 +66,6 @@ Hardware and software integration will be needed for this project. The embedded 
 
 
 
-# Conclusion
-
-
-
-
 
 
 
