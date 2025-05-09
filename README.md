@@ -12,10 +12,11 @@ microcontroller to communicate with a BLE module, an Arduino MKR Zero board, and
 # Block Diagram
 ![image](https://github.com/user-attachments/assets/31872491-df78-43a7-9c28-ebdff529e089)
 
+# Components Used
+
+
 # Pinout Plan
 
-
-# Components Used
 
 
 
