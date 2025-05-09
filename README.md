@@ -10,12 +10,20 @@ microcontroller to communicate with a BLE module, an Arduino MKR Zero board, and
 
 
 # Block Diagram
-![Alt text] (images/BlockDiagram.JPEG)
-
-# Pinout Plan
 
 
 # Components Used
+
+# Pinout Plan
+| Tiva TM4C123G Launch Pad |      BLE         | 
+|:-------------------------|:----------------:|
+|           PB7            | UART MOD (Pin 1) |
+|           GND            | UART CTS (Pin 2) |
+|         PB0 (U1RX)       | UART TXO (Pin 3) |
+|         PB1 (U1TX)       | UART RXI (Pin 4) |
+|         VCC (3.3V)       | UART Vin (Pin 5) |
+|           GND            | UART GND (Pin 7) |
+ 
 
 
 
