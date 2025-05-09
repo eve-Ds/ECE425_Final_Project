@@ -28,7 +28,7 @@ Hardware and software integration will be needed for this project. The embedded 
 # Pinout Plan
 
 | Tiva TM4C123G Launch Pad |      BLE         | 
-|:-------------------------|:----------------:|
+|:-------------------------|:----------------:| 
 |           PB7            | UART MOD (Pin 1) |
 |           GND            | UART CTS (Pin 2) |
 |         PB0 (U1RX)       | UART TXO (Pin 3) |
